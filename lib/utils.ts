@@ -17,7 +17,7 @@ export function generateWhatsAppLink(
   productName: string,
   variant: string,
   price: number,
-  phoneNumber: string = "+919876543210"
+  phoneNumber: string = "+91 91375 62096"
 ): string {
   const message = `Hi! I want to order:
 

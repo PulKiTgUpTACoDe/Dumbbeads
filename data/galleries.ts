@@ -37,11 +37,6 @@ const DEFAULT_VARIANTS = [
     { id: "v3", name: "Sunset Orange", color: "#FF9F1C", stockCount: 4 },
 ];
 
-/**
- * Dynamically load all galleries from the filesystem
- * Scans public/images/ for folders and creates gallery objects
- * Optionally reads gallery.json from each folder for custom metadata
- */
 export function getGalleries(): Gallery[] {
     const imagesDirectory = path.join(process.cwd(), "public", "images");
 
