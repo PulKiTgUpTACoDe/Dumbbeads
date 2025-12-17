@@ -1,10 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { products } from "@/data/products";
-import ProductCard from "@/components/ProductCard";
+import { Gallery } from "@/data/galleries";
+import GalleryCard from "@/components/GalleryCard";
 
-export default function ProductShowcase() {
+interface ProductShowcaseProps {
+  galleries: Gallery[];
+}
+
+export default function ProductShowcase({ galleries }: ProductShowcaseProps) {
+
   return (
     <section className="py-20 px-4 bg-neutral-950">
       <div className="container mx-auto max-w-7xl">
@@ -25,10 +30,10 @@ export default function ProductShowcase() {
           </p>
         </motion.div>
 
-        {/* Product Grid */}
+        {/* Gallery Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-          {products.map((product, index) => (
-            <ProductCard key={product.id} product={product} index={index} />
+          {galleries.map((gallery, index) => (
+            <GalleryCard key={gallery.id} gallery={gallery} index={index} />
           ))}
         </div>
       </div>
