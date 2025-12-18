@@ -24,32 +24,17 @@ const instagramPosts = [
   {
     id: 4,
     image: "/images/instagram/img4.jpg",
-    url: "https://www.instagram.com/p/YOUR_POST_ID_4/",
+    url: "https://www.instagram.com/p/C9VDTMLIa_V/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
   },
   {
     id: 5,
     image: "/images/instagram/img5.jpg",
-    url: "https://www.instagram.com/p/YOUR_POST_ID_5/",
+    url: "https://www.instagram.com/p/C-IVAF2ozcc/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
   },
   {
     id: 6,
     image: "/images/instagram/img6.jpg",
-    url: "https://www.instagram.com/p/YOUR_POST_ID_6/",
-  },
-  {
-    id: 7,
-    image: "/images/instagram/img7.jpg",
-    url: "https://www.instagram.com/p/YOUR_POST_ID_7/",
-  },
-  {
-    id: 8,
-    image: "/images/instagram/img8.jpg",
-    url: "https://www.instagram.com/p/YOUR_POST_ID_8/",
-  },
-  {
-    id: 9,
-    image: "/images/instagram/img9.jpg",
-    url: "https://www.instagram.com/p/YOUR_POST_ID_9/",
+    url: "https://www.instagram.com/p/DCXAHURonD_/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
   },
 ];
 

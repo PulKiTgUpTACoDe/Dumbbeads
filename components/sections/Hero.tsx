@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { generateWhatsAppLink } from "@/lib/utils";
 import { Sparkles } from "lucide-react";
@@ -68,6 +69,24 @@ export default function Hero() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="space-y-8"
         >
+          {/* Logo */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.1, duration: 0.8, ease: "easeOut" }}
+            className="flex justify-center mb-6"
+          >
+            <div className="relative w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 rounded-full overflow-hidden border-4 border-white/20 shadow-2xl shadow-purple-500/30 bg-white/5 backdrop-blur-sm">
+              <Image
+                src="/images/logo.jpg"
+                alt="Dumbbeads Logo"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+          </motion.div>
+
           {/* Badge */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}

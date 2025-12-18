@@ -12,6 +12,10 @@ export const metadata: Metadata = {
   title: "Dumbbeads | Handcrafted Beaded Jewelry",
   description:
     "Unique, minimal, handmade beaded jewelry. Shop our collection of handcrafted necklaces and bracelets. Order directly on WhatsApp.",
+  icons: {
+    icon: [{ url: "/images/logo.jpg" }, { url: "/favicon.ico" }],
+    apple: "/images/logo.jpg",
+  },
   keywords: [
     "handmade jewelry",
     "beaded necklace",

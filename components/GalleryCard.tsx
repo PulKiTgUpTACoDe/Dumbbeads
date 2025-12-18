@@ -173,13 +173,12 @@ export default function GalleryCard({ gallery, index }: GalleryCardProps) {
                 </div>
               </div>
 
-              {/* Price and CTA - Mobile optimized */}
+              {/* Price and CTA */}
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-0 pt-3 border-t border-neutral-800">
                 <div className="text-center sm:text-left">
                   <p className="text-2xl sm:text-xl font-bold text-white">
                     ₹{gallery.price}
                   </p>
-                  <p className="text-xs text-neutral-500">Free Shipping</p>
                 </div>
                 <motion.div
                   whileHover={{ scale: 1.05 }}
