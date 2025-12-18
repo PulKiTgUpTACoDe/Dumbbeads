@@ -23,7 +23,7 @@ export default function ProductShowcase({
   // Limit galleries if maxGalleries is specified
   const displayedGalleries = maxGalleries
     ? galleries.slice(0, maxGalleries)
-    : galleries;
+    : galleries.slice(0, galleries.length - 1);
 
   return (
     <section className="py-12 sm:py-16 md:py-20 px-4 bg-neutral-950">
