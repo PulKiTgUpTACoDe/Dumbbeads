@@ -8,84 +8,87 @@ import Image from "next/image";
 const instagramPosts = [
   {
     id: 1,
-    image: "/images/insta-1.jpg",
-    url: "https://www.instagram.com/p/YOUR_POST_ID_1/", 
+    image: "/images/instagram/img1.webp",
+    url: "https://www.instagram.com/p/C8wq8Z7vxhc/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
   },
   {
     id: 2,
-    image: "/images/insta-2.jpg",
-    url: "https://www.instagram.com/p/YOUR_POST_ID_2/",
+    image: "/images/instagram/img2.jpg",
+    url: "https://www.instagram.com/p/C9FdsRvt3bf/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
   },
   {
     id: 3,
-    image: "/images/insta-3.jpg",
-    url: "https://www.instagram.com/p/YOUR_POST_ID_3/",
+    image: "/images/instagram/img3.jpg",
+    url: "https://www.instagram.com/p/C9VDTMLIa_V/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
   },
   {
     id: 4,
-    image: "/images/insta-4.jpg",
+    image: "/images/instagram/img4.jpg",
     url: "https://www.instagram.com/p/YOUR_POST_ID_4/",
   },
   {
     id: 5,
-    image: "/images/insta-5.jpg",
+    image: "/images/instagram/img5.jpg",
     url: "https://www.instagram.com/p/YOUR_POST_ID_5/",
   },
   {
     id: 6,
-    image: "/images/insta-6.jpg",
+    image: "/images/instagram/img6.jpg",
     url: "https://www.instagram.com/p/YOUR_POST_ID_6/",
   },
   {
     id: 7,
-    image: "/images/insta-7.jpg",
+    image: "/images/instagram/img7.jpg",
     url: "https://www.instagram.com/p/YOUR_POST_ID_7/",
   },
   {
     id: 8,
-    image: "/images/insta-8.jpg",
+    image: "/images/instagram/img8.jpg",
     url: "https://www.instagram.com/p/YOUR_POST_ID_8/",
   },
   {
     id: 9,
-    image: "/images/insta-9.jpg",
+    image: "/images/instagram/img9.jpg",
     url: "https://www.instagram.com/p/YOUR_POST_ID_9/",
   },
 ];
 
 export default function InstagramFeed() {
   return (
-    <section className="py-20 px-4 bg-gradient-to-b from-neutral-900 to-neutral-950">
+    <section className="py-12 sm:py-16 md:py-20 px-4 bg-gradient-to-b from-neutral-900 to-neutral-950">
       <div className="container mx-auto max-w-7xl">
-        {/* Section Header */}
+        {/* Section Header - Mobile optimized */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-8 sm:mb-10 md:mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 sm:mb-4">
             Follow Us on Instagram
           </h2>
-          <p className="text-lg text-neutral-400 mb-6">
+          <p className="text-base sm:text-lg text-neutral-400 mb-5 sm:mb-6 px-4">
             Get styling tips, new designs, and exclusive offers
           </p>
-          <Button
-            onClick={() =>
-              window.open(
-                "https://www.instagram.com/dumbbeads.__?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
-              )
-            }
-            className="bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 hover:from-purple-700 hover:via-pink-700 hover:to-orange-700 text-white font-semibold rounded-full px-8 py-6 text-base shadow-lg shadow-pink-500/30 transition-all duration-300 hover:scale-105"
-          >
-            <Instagram className="w-5 h-5 mr-2" />
-            @dumbbeads
-          </Button>
+
+          <motion.div whileTap={{ scale: 0.95 }}>
+            <Button
+              onClick={() =>
+                window.open(
+                  "https://www.instagram.com/dumbbeads.__?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                )
+              }
+              className="w-full sm:w-auto bg-gradient-to-r from-purple-600 via-pink-600 to-orange-600 hover:from-purple-700 hover:via-pink-700 hover:to-orange-700 active:from-purple-800 active:via-pink-800 active:to-orange-800 text-white font-semibold rounded-full px-8 py-6 sm:py-6 text-base shadow-lg shadow-pink-500/30 transition-all duration-300 hover:scale-105 active:scale-95 touch-manipulation"
+            >
+              <Instagram className="w-5 h-5 mr-2" />
+              @dumbbeads
+            </Button>
+          </motion.div>
         </motion.div>
 
-        {/* Instagram Grid */}
-        <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-2 md:gap-4">
+        {/* Instagram Grid - Mobile optimized */}
+        <div className="grid grid-cols-3 gap-2 sm:gap-3 md:gap-4">
           {instagramPosts.map((post, index) => (
             <motion.a
               key={post.id}
@@ -96,7 +99,8 @@ export default function InstagramFeed() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.05 }}
-              className="relative aspect-square group cursor-pointer overflow-hidden rounded-lg bg-neutral-800 block"
+              whileTap={{ scale: 0.95 }}
+              className="relative aspect-square group cursor-pointer overflow-hidden rounded-lg bg-neutral-800 block touch-manipulation"
             >
               {/* Image - will show if exists, otherwise gradient */}
               <Image

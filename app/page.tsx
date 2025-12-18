@@ -8,14 +8,16 @@ import FinalCTA from "@/components/sections/FinalCTA";
 import { getGalleries } from "@/data/galleries";
 
 export default function Home() {
-  // Load galleries server-side (page.tsx is a Server Component by default)
-  // This allows us to use Node.js fs module
   const galleries = getGalleries();
 
   return (
     <main className="min-h-screen bg-neutral-950">
       <Hero />
-      <ProductShowcase galleries={galleries} />
+      <ProductShowcase
+        galleries={galleries}
+        maxGalleries={6}
+        showViewAll={true}
+      />
       <HowItWorks />
       <SocialProof />
       <InstagramFeed />

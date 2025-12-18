@@ -46,25 +46,6 @@ export default function FinalCTA() {
           </motion.div>
         </div>
       </section>
-
-      {/* Mobile Sticky CTA */}
-      <motion.div
-        initial={{ y: 100 }}
-        animate={{ y: 0 }}
-        className="md:hidden fixed bottom-0 left-0 right-0 z-50 p-4 bg-gradient-to-t from-black via-black/95 to-transparent backdrop-blur-sm"
-      >
-        <Button
-          size="lg"
-          onClick={handleOrderClick}
-          className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-6 text-lg rounded-full shadow-2xl shadow-purple-500/50"
-        >
-          <MessageCircle className="w-5 h-5 mr-2" />
-          Order on WhatsApp
-        </Button>
-      </motion.div>
-
-      {/* Spacer for mobile sticky button */}
-      <div className="md:hidden h-24" />
     </>
   );
 }

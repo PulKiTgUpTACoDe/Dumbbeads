@@ -88,10 +88,8 @@ export default function Hero() {
             transition={{ delay: 0.4, duration: 0.8 }}
             className="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-tight"
           >
-            Handcrafted
-            <br />
             <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
-              Beaded Jewelry
+              dumbbeads
             </span>
           </motion.h1>
 
@@ -100,7 +98,16 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.8 }}
-            className="text-xl md:text-2xl text-neutral-300 max-w-2xl mx-auto"
+            className="text-xl md:text-2xl text-neutral-300 max-w-2xl mx-auto bg-gradient-to-r from-purple-400 via-pink-300 to-blue-300 bg-clip-text text-transparent"
+          >
+            Handcrafted Beaded Jewelry
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7, duration: 0.8 }}
+            className="text-base md:text-lg text-neutral-400 max-w-xl mx-auto"
           >
             Unique. Minimal. Handmade.
           </motion.p>

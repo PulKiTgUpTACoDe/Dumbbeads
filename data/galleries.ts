@@ -92,7 +92,7 @@ export function getGalleries(): Gallery[] {
             description:
                 metadata.description ||
                 `Beautiful handcrafted jewelry collection featuring ${imageFiles.length} unique pieces.`,
-            price: metadata.price || 899 + index * 200,
+            price: metadata.price || Math.floor(Math.random() * (120 - 70 + 1)) + 70, // Random price between ₹70-200
             coverImage,
             images: imageFiles,
             stockUrgency: metadata.stockUrgency,
