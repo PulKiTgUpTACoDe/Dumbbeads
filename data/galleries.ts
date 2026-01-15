@@ -23,10 +23,14 @@ export interface Gallery {
 export async function getGalleries(): Promise<Gallery[]> {
     const collections = await getPublishedCollections()
 
-    return collections.map((collection: Awaited<ReturnType<typeof getPublishedCollections>>[number]) => {
+    type CollectionWithProducts = Awaited<ReturnType<typeof getPublishedCollections>>[number]
+    type Product = CollectionWithProducts['products'][number]
+    type Image = Product['images'][number]
+
+    return collections.map((collection: CollectionWithProducts) => {
         // Get all images from all products in this collection
-        const allImages = collection.products.flatMap((product) =>
-            product.images.map((img) => img.url)
+        const allImages = collection.products.flatMap((product: Product) =>
+            product.images.map((img: Image) => img.url)
         )
 
         // Get first product for pricing and variants
