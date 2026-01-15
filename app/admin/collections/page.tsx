@@ -6,6 +6,8 @@ import { redirect } from "next/navigation";
 import { auth } from "@/auth";
 import DeleteCollectionButton from "@/components/admin/DeleteCollectionButton";
 
+type Collection = Awaited<ReturnType<typeof getAllCollections>>[number];
+
 export default async function CollectionsPage() {
   const session = await auth();
   if (!session) {
