@@ -6,15 +6,22 @@ const globalForPrisma = globalThis as unknown as {
     prisma: PrismaClient | undefined;
 };
 
+// Connection pool configuration optimized for serverless (Vercel)
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
+    max: 1, // Limit connections for serverless
+    idleTimeoutMillis: 30000,
+    connectionTimeoutMillis: 10000,
     ssl: {
         rejectUnauthorized: false
     }
 });
 const adapter = new PrismaPg(pool);
 
-export const prisma = globalForPrisma.prisma ?? new PrismaClient({ adapter });
+export const prisma = globalForPrisma.prisma ?? new PrismaClient({
+    adapter,
+    log: process.env.NODE_ENV === 'development' ? ['query', 'error', 'warn'] : ['error']
+});
 
 if (process.env.NODE_ENV !== 'production') {
     globalForPrisma.prisma = prisma;
