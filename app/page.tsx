@@ -7,8 +7,8 @@ import TrustPolicy from "@/components/sections/TrustPolicy";
 import FinalCTA from "@/components/sections/FinalCTA";
 import { getGalleries } from "@/data/galleries";
 
-export default function Home() {
-  const galleries = getGalleries();
+export default async function Home() {
+  const galleries = await getGalleries();
 
   return (
     <main className="min-h-screen bg-neutral-950">

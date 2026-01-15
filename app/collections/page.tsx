@@ -9,8 +9,8 @@ export const metadata = {
   description: "Browse all our handcrafted beaded jewelry collections",
 };
 
-export default function CollectionsPage() {
-  const galleries = getGalleries();
+export default async function CollectionsPage() {
+  const galleries = await getGalleries();
 
   return (
     <main className="min-h-screen bg-neutral-950">

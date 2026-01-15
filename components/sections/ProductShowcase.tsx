@@ -20,10 +20,10 @@ export default function ProductShowcase({
   showViewAll = false,
   isCollectionsPage = false,
 }: ProductShowcaseProps) {
-  // Limit galleries if maxGalleries is specified
+  // Limit galleries if maxGalleries is specified, otherwise show all
   const displayedGalleries = maxGalleries
     ? galleries.slice(0, maxGalleries)
-    : galleries.slice(0, galleries.length - 1);
+    : galleries;
 
   return (
     <section className="py-12 sm:py-16 md:py-20 px-4 bg-neutral-950">
@@ -45,8 +45,8 @@ export default function ProductShowcase({
           </p>
         </motion.div>
 
-        {/* Gallery Grid - Mobile optimized */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        {/* Gallery Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-[1400px] mx-auto">
           {displayedGalleries.map((gallery, index) => (
             <GalleryCard key={gallery.id} gallery={gallery} index={index} />
           ))}

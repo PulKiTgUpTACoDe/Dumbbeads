@@ -84,12 +84,12 @@ export default function GalleryCard({ gallery, index }: GalleryCardProps) {
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         whileTap={{ scale: 0.98 }}
-        className="max-w-md mx-auto touch-manipulation" // Better touch handling
+        className="w-full touch-manipulation" // Better touch handling
       >
         <Card className="group overflow-hidden border-neutral-800 bg-neutral-900/50 backdrop-blur-sm hover:border-purple-500/50 active:border-purple-500 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/20 active:shadow-purple-500/40">
           <CardContent className="p-0">
             {/* Cover Image - Mobile optimized aspect ratio */}
-            <div className="relative aspect-square sm:aspect-[4/3] overflow-hidden bg-neutral-800">
+            <div className="relative aspect-square sm:aspect-4/3 overflow-hidden bg-neutral-800">
               <motion.div
                 whileHover={{ scale: 1.08 }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
