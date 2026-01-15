@@ -16,6 +16,9 @@ const pool = new Pool({
         rejectUnauthorized: false
     }
 });
+
+console.log("DATABASE_URL exists:", !!process.env.DATABASE_URL)
+
 const adapter = new PrismaPg(pool);
 
 export const prisma = globalForPrisma.prisma ?? new PrismaClient({

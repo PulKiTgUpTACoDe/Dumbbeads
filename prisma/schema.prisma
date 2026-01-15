@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -9,7 +6,6 @@ datasource db {
   provider = "postgresql"
 }
 
-// Admin user model
 model User {
   id        String   @id @default(cuid())
   email     String   @unique
@@ -22,41 +18,35 @@ model User {
   @@map("users")
 }
 
-// Collection (Gallery) model
 model Collection {
-  id          String   @id @default(cuid())
+  id          String    @id @default(cuid())
   name        String
   description String?
-  slug        String   @unique
-  status      String   @default("draft") // draft | published
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  products Product[]
+  slug        String    @unique
+  status      String    @default("draft")
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  products    Product[]
 
   @@map("collections")
 }
 
-// Product model
 model Product {
-  id           String   @id @default(cuid())
+  id           String     @id @default(cuid())
   name         String
   description  String?
   price        Float
-  stockUrgency String? // Optional stock urgency message
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-
+  stockUrgency String?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
   collectionId String
+  images       Image[]
   collection   Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
-
-  images   Image[]
-  variants Variant[]
+  variants     Variant[]
 
   @@map("products")
 }
 
-// Variant model for product variations
 model Variant {
   id         String   @id @default(cuid())
   name       String
@@ -64,25 +54,22 @@ model Variant {
   stockCount Int      @default(0)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-
-  productId String
-  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId  String
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   @@map("variants")
 }
 
-// Image model
 model Image {
   id           String   @id @default(cuid())
   url          String
   alt          String?
-  cloudinaryId String? // For deletion from Cloudinary
+  cloudinaryId String?
   order        Int      @default(0)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
-
-  productId String?
-  product   Product? @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId    String?
+  product      Product? @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   @@map("images")
 }
