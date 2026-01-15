@@ -13,14 +13,15 @@ const updateProductSchema = z.object({
 // GET /api/admin/products/[id] - Get single product
 export async function GET(
     request: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     const authResult = await requireAdmin()
     if (authResult instanceof NextResponse) return authResult
 
     try {
+        const { id } = await params
         const product = await prisma.product.findUnique({
-            where: { id: params.id },
+            where: { id },
             include: {
                 images: { orderBy: { order: "asc" } },
                 variants: true,
@@ -41,17 +42,18 @@ export async function GET(
 // PATCH /api/admin/products/[id] - Update product
 export async function PATCH(
     request: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     const authResult = await requireAdmin()
     if (authResult instanceof NextResponse) return authResult
 
     try {
+        const { id } = await params
         const body = await request.json()
         const validated = updateProductSchema.parse(body)
 
         const product = await prisma.product.update({
-            where: { id: params.id },
+            where: { id },
             data: validated,
             include: {
                 images: true,
@@ -74,14 +76,15 @@ export async function PATCH(
 // DELETE /api/admin/products/[id] - Delete product
 export async function DELETE(
     request: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     const authResult = await requireAdmin()
     if (authResult instanceof NextResponse) return authResult
 
     try {
+        const { id } = await params
         await prisma.product.delete({
-            where: { id: params.id },
+            where: { id },
         })
 
         return NextResponse.json({ message: "Product deleted successfully" })

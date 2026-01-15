@@ -8,8 +8,8 @@ import { hashPassword } from "../lib/auth"
  */
 
 async function createAdmin() {
-    const email = process.env.ADMIN_EMAIL || "admin@dumbbeads.com"
-    const password = process.env.ADMIN_PASSWORD || "admin123"
+    const email = process.env.ADMIN_EMAIL || ""
+    const password = process.env.ADMIN_PASSWORD || ""
 
     try {
         // Check if user already exists
