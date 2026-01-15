@@ -6,6 +6,9 @@ import { redirect } from "next/navigation";
 import { auth } from "@/auth";
 import DeleteCollectionButton from "@/components/admin/DeleteCollectionButton";
 
+// Force dynamic rendering - admin pages need authentication
+export const dynamic = "force-dynamic";
+
 export default async function CollectionsPage() {
   const session = await auth();
   if (!session) {

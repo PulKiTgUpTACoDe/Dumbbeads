@@ -9,6 +9,9 @@ export const metadata = {
   description: "Browse all our handcrafted beaded jewelry collections",
 };
 
+// Force dynamic rendering to avoid database calls during build
+export const dynamic = "force-dynamic";
+
 export default async function CollectionsPage() {
   const galleries = await getGalleries();
 
