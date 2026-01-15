@@ -8,12 +8,6 @@ export interface Gallery {
     coverImage: string
     images: string[]
     stockUrgency: string | null
-    variants: {
-        id: string
-        name: string
-        color: string
-        stockCount: number
-    }[]
 }
 
 /**
@@ -44,7 +38,6 @@ export async function getGalleries(): Promise<Gallery[]> {
             coverImage: allImages[0] || "/images/placeholder.jpg",
             images: allImages,
             stockUrgency: firstProduct?.stockUrgency,
-            variants: firstProduct?.variants || [],
         }
     })
 }

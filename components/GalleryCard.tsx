@@ -17,7 +17,6 @@ interface GalleryCardProps {
 }
 
 export default function GalleryCard({ gallery, index }: GalleryCardProps) {
-  const [selectedVariant, setSelectedVariant] = useState(gallery.variants[0]);
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
 
   // Mouse position tracking for smooth tilt effect
@@ -53,10 +52,11 @@ export default function GalleryCard({ gallery, index }: GalleryCardProps) {
     y.set(0);
   };
 
-  const handleBuyNow = () => {
+  const handleBuyNow = (e: React.MouseEvent) => {
+    e.stopPropagation();
     const link = generateWhatsAppLink(
       gallery.name,
-      selectedVariant.name,
+      gallery.description,
       gallery.price
     );
     window.open(link, "_blank");
@@ -138,39 +138,6 @@ export default function GalleryCard({ gallery, index }: GalleryCardProps) {
                 <p className="text-xs text-neutral-400 leading-relaxed line-clamp-2">
                   {gallery.description}
                 </p>
-              </div>
-
-              {/* Variant Selector - Compact */}
-              <div>
-                <p className="text-xs text-neutral-400 mb-2">Select Color:</p>
-                <div className="flex flex-wrap gap-1.5">
-                  {gallery.variants.map((variant) => (
-                    <motion.button
-                      key={variant.id}
-                      onClick={() => setSelectedVariant(variant)}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className={`relative flex items-center gap-1.5 px-2 py-1.5 rounded-lg border transition-all duration-200 ${
-                        selectedVariant.id === variant.id
-                          ? "border-purple-500 bg-purple-500/10"
-                          : "border-neutral-700 hover:border-neutral-600"
-                      }`}
-                    >
-                      <div
-                        className="w-3 h-3 rounded-full border-2 border-white/20"
-                        style={{ backgroundColor: variant.color }}
-                      />
-                      <span className="text-xs text-neutral-300">
-                        {variant.name}
-                      </span>
-                      {variant.stockCount <= 3 && (
-                        <span className="text-xs text-red-400 font-medium">
-                          ({variant.stockCount})
-                        </span>
-                      )}
-                    </motion.button>
-                  ))}
-                </div>
               </div>
 
               {/* Price and CTA */}
