@@ -5,6 +5,9 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { FolderOpen, Package, Image as ImageIcon, Plus } from "lucide-react";
 
+// Force dynamic rendering - admin pages need authentication and database access
+export const dynamic = "force-dynamic";
+
 export default async function DashboardPage() {
   const session = await auth();
 
