@@ -24,7 +24,7 @@ async function createAdmin() {
 
         // Create admin user
         const hashedPassword = await hashPassword(password)
-        const user = await prisma.user.create({
+        await prisma.user.create({
             data: {
                 email,
                 password: hashedPassword,

@@ -89,15 +89,15 @@ export default function DemoSection() {
   return (
     <section
       ref={sectionRef}
-      className="py-20 md:py-28 px-4 bg-gradient-to-b from-neutral-950 to-neutral-900"
+      className="py-20 md:py-28 px-4 bg-theme-secondary transition-colors duration-400"
     >
       <div className="container mx-auto max-w-6xl">
         {/* Section header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-theme-primary mb-4">
             How It Works
           </h2>
-          <p className="text-lg text-neutral-400">
+          <p className="text-lg text-theme-muted">
             Simple 3-step process to get your favorite jewelry
           </p>
         </div>
@@ -121,24 +121,24 @@ export default function DemoSection() {
                 </div>
 
                 {/* Step label */}
-                <p className="text-sm font-mono text-purple-400 uppercase tracking-widest">
+                <p className="text-sm font-mono dark:text-purple-400 text-indigo-600 uppercase tracking-widest">
                   Step {step.step}
                 </p>
 
                 {/* Title */}
-                <h3 className="text-xl md:text-2xl font-bold text-white">
+                <h3 className="text-xl md:text-2xl font-bold text-theme-primary">
                   {step.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-neutral-400 text-base leading-relaxed max-w-sm mx-auto">
+                <p className="text-theme-muted text-base leading-relaxed max-w-sm mx-auto">
                   {step.description}
                 </p>
               </div>
 
               {/* Connector line (desktop only) */}
               {index < steps.length - 1 && (
-                <div className="step-connector hidden md:block absolute top-10 left-[60%] w-[80%] h-0.5 bg-gradient-to-r from-neutral-700 to-transparent origin-left" />
+                <div className="step-connector hidden md:block absolute top-10 left-[60%] w-[80%] h-0.5 bg-gradient-to-r dark:from-neutral-700 from-indigo-200 to-transparent origin-left" />
               )}
             </div>
           ))}

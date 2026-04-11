@@ -6,6 +6,7 @@ import SocialProof from "@/components/sections/SocialProof";
 import InstagramFeed from "@/components/sections/InstagramFeed";
 import TrustPolicy from "@/components/sections/TrustPolicy";
 import FinalCTA from "@/components/sections/FinalCTA";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 import { getGalleries } from "@/data/galleries";
 
 // Force dynamic rendering to avoid database calls during build
@@ -15,7 +16,8 @@ export default async function Home() {
   const galleries = await getGalleries();
 
   return (
-    <main className="min-h-screen bg-neutral-950">
+    <main className="min-h-screen bg-theme-primary transition-colors duration-400">
+      <ThemeToggle />
       <Hero />
       <StorySection />
       <ProductShowcase
@@ -31,3 +33,4 @@ export default async function Home() {
     </main>
   );
 }
+

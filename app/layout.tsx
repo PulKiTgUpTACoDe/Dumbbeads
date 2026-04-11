@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import PageTransitionWrapper from "@/components/providers/PageTransitionWrapper";
+import ThemeProvider from "@/components/providers/ThemeProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -39,14 +40,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} font-sans antialiased`}>
-        <SmoothScrollProvider>
-          <PageTransitionWrapper>
-            {children}
-          </PageTransitionWrapper>
-        </SmoothScrollProvider>
+        <ThemeProvider>
+          <SmoothScrollProvider>
+            <PageTransitionWrapper>
+              {children}
+            </PageTransitionWrapper>
+          </SmoothScrollProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
 }
+

@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Save, Trash2 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import Spinner from "@/components/ui/spinner";
 
 interface Product {
@@ -113,8 +114,8 @@ export default function CollectionEditor({
 
       router.push("/admin/collections");
       router.refresh();
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : String(err));
     } finally {
       setIsSubmitting(false);
     }
@@ -144,8 +145,8 @@ export default function CollectionEditor({
 
       router.push("/admin/collections");
       router.refresh();
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : String(err));
       setIsDeleting(false);
     }
   };
@@ -285,11 +286,15 @@ export default function CollectionEditor({
                 >
                   <div className="flex items-start gap-4">
                     {product.images[0] && (
-                      <img
-                        src={product.images[0].url}
-                        alt={product.name}
-                        className="w-20 h-20 object-cover rounded"
-                      />
+                      <div className="w-20 h-20 relative">
+                        <Image
+                          src={product.images[0].url}
+                          alt={product.name}
+                          fill
+                          className="object-cover rounded"
+                          sizes="80px"
+                        />
+                      </div>
                     )}
                     <div className="flex-1">
                       <h3 className="text-white font-medium">{product.name}</h3>

@@ -97,8 +97,8 @@ export default function NewCollectionPage() {
 
       router.push("/admin/collections");
       router.refresh();
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : String(err));
     } finally {
       setIsSubmitting(false);
     }
@@ -231,7 +231,7 @@ export default function NewCollectionPage() {
                 <option value="published">Published</option>
               </select>
               <p className="text-xs text-neutral-500 mt-1">
-                Draft collections won't be visible on the public site
+                Draft collections won&apos;t be visible on the public site
               </p>
             </div>
           </div>

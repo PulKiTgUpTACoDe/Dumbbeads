@@ -85,14 +85,14 @@ export default function SocialProof() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-20 px-4 bg-neutral-900">
+    <section ref={sectionRef} className="py-20 px-4 bg-theme-secondary transition-colors duration-400">
       <div className="container mx-auto max-w-7xl">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-theme-primary mb-4">
             What Our Customers Say
           </h2>
-          <p className="text-lg text-neutral-400">
+          <p className="text-lg text-theme-muted">
             Join hundreds of happy customers who love our jewelry
           </p>
         </div>
@@ -104,7 +104,7 @@ export default function SocialProof() {
         >
           {testimonials.map((testimonial, index) => (
             <div key={index} style={{ willChange: "transform, opacity" }}>
-              <Card className="h-full border-neutral-800 bg-neutral-950/50 backdrop-blur-sm hover:border-purple-500/30 transition-all duration-300">
+              <Card className="h-full border-theme-card bg-theme-card backdrop-blur-sm dark:hover:border-purple-500/30 hover:border-indigo-300 transition-all duration-300">
                 <CardContent className="p-6 space-y-4">
                   {/* Stars */}
                   <div className="flex gap-1">
@@ -117,20 +117,20 @@ export default function SocialProof() {
                   </div>
 
                   {/* Quote */}
-                  <p className="text-neutral-300 leading-relaxed">
+                  <p className="text-theme-secondary leading-relaxed">
                     &quot;{testimonial.quote}&quot;
                   </p>
 
                   {/* Customer Info */}
                   <div className="flex items-center gap-3 pt-2">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center text-white font-semibold text-sm">
+                    <div className="w-10 h-10 rounded-full bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 active:from-blue-800 active:to-indigo-800 dark:from-purple-600 dark:to-pink-600 dark:hover:from-purple-700 dark:hover:to-pink-700 dark:active:from-purple-800 dark:active:to-pink-800 flex items-center justify-center text-white font-semibold text-sm">
                       {testimonial.initials}
                     </div>
                     <div>
-                      <p className="text-white font-medium">
+                      <p className="text-theme-primary font-medium">
                         {testimonial.name}
                       </p>
-                      <p className="text-xs text-neutral-500">
+                      <p className="text-xs text-theme-muted">
                         Verified Customer
                       </p>
                     </div>

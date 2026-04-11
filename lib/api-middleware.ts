@@ -43,13 +43,13 @@ export async function requireAdmin() {
 /**
  * Handle errors in API routes
  */
-export function handleApiError(error: any) {
+export function handleApiError(error: unknown) {
     console.error("API Error:", error)
 
     return NextResponse.json(
         {
-            error: error.message || "Internal server error",
-            details: process.env.NODE_ENV === "development" ? error.stack : undefined
+            error: error instanceof Error ? error.message : "Internal server error",
+            details: process.env.NODE_ENV === "development" ? (error instanceof Error ? error.stack : undefined) : undefined
         },
         { status: 500 }
     )

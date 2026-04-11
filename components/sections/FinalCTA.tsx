@@ -70,12 +70,12 @@ export default function FinalCTA() {
   return (
     <section
       ref={sectionRef}
-      className="py-20 md:py-24 px-4 bg-gradient-to-br from-purple-900 via-pink-900 to-blue-900 relative overflow-hidden"
+      className="py-20 md:py-24 px-4 bg-linear-to-r from-blue-400 to-indigo-700 hover:from-blue-700 hover:to-indigo-700 active:from-blue-800 active:to-indigo-800 dark:from-purple-600 dark:to-pink-600 dark:hover:from-purple-700 dark:hover:to-pink-700 dark:active:from-purple-800 dark:active:to-pink-800 relative overflow-hidden transition-colors duration-400"
     >
       {/* Background Effects */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(255,255,255,0.1)_0%,_transparent_50%)]" />
-      <div className="absolute top-0 left-0 w-96 h-96 bg-purple-500/30 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-pink-500/30 rounded-full blur-3xl" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1)_0%,transparent_50%)]" />
+      <div className="absolute top-0 left-0 w-96 h-96 dark:bg-purple-500/30 bg-white/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 dark:bg-pink-500/30 bg-white/10 rounded-full blur-3xl" />
 
       <div className="container mx-auto max-w-4xl relative z-10">
         <div className="text-center space-y-6">
@@ -110,7 +110,7 @@ export default function FinalCTA() {
               <Button
                 size="lg"
                 onClick={handleOrderClick}
-                className="bg-white text-purple-900 hover:bg-neutral-100 px-10 py-7 text-xl font-bold rounded-full shadow-2xl transition-all duration-300 animate-pulse-glow"
+                className="dark:bg-white dark:text-green-500 bg-white text-green-500 hover:bg-neutral-100 px-10 py-7 text-xl font-bold rounded-full shadow-2xl transition-all duration-300 animate-pulse-glow"
               >
                 <MessageCircle className="w-6 h-6 mr-3" />
                 Order on WhatsApp

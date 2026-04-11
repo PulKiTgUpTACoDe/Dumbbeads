@@ -21,6 +21,6 @@ export async function verifyPassword(
 /**
  * Check if user is authenticated and has admin role
  */
-export function isAdmin(user: any): boolean {
+export function isAdmin(user: { role?: string | null } | null | undefined): boolean {
     return user?.role === 'admin'
 }

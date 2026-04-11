@@ -61,7 +61,7 @@ export default function ProductShowcase({
   }, [displayedGalleries]);
 
   return (
-    <section ref={sectionRef} className="py-12 sm:py-16 md:py-20 px-4 bg-neutral-950">
+    <section ref={sectionRef} className="py-12 sm:py-16 md:py-20 px-4 bg-theme-primary transition-colors duration-400">
       <div className="container mx-auto max-w-7xl">
         {/* Section Header */}
         <motion.div
@@ -71,10 +71,10 @@ export default function ProductShowcase({
           transition={{ duration: 0.6 }}
           className="text-center mb-10 sm:mb-12 md:mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 sm:mb-4 px-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-theme-primary mb-3 sm:mb-4 px-4">
             {showViewAll ? "Latest Collections" : "Our Collection"}
           </h2>
-          <p className="text-base sm:text-lg text-neutral-400 max-w-2xl mx-auto px-4">
+          <p className="text-base sm:text-lg text-theme-muted max-w-2xl mx-auto px-4">
             Each piece is carefully handcrafted with premium beads and
             materials. Choose your favorite and order instantly on WhatsApp.
           </p>
@@ -106,7 +106,7 @@ export default function ProductShowcase({
                     window.scrollTo({ top: 0, behavior: "smooth" })
                   }
                   size="lg"
-                  className="bg-linear-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-full px-8 py-6 text-lg shadow-2xl shadow-purple-500/50 transition-all duration-300 hover:scale-105"
+                  className="bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 active:from-blue-800 active:to-indigo-800 dark:from-purple-600 dark:to-pink-600 dark:hover:from-purple-700 dark:hover:to-pink-700 dark:active:from-purple-800 dark:active:to-pink-800  text-white font-semibold rounded-full px-8 py-6 text-lg shadow-2xl shadow-purple-500/50 transition-all duration-300 hover:scale-105"
                 >
                   Back to Top
                   <ArrowUp className="ml-2 w-5 h-5" />
@@ -115,7 +115,7 @@ export default function ProductShowcase({
                 <Link href="/collections">
                   <Button
                     size="lg"
-                    className="bg-linear-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-full px-8 py-6 text-lg shadow-2xl shadow-purple-500/50 transition-all duration-300 hover:scale-105"
+                    className="bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 active:from-blue-800 active:to-indigo-800 dark:from-purple-600 dark:to-pink-600 dark:hover:from-purple-700 dark:hover:to-pink-700 dark:active:from-purple-800 dark:active:to-pink-800  text-white font-semibold rounded-full px-8 py-6 text-lg shadow-2xl shadow-purple-500/50 transition-all duration-300 hover:scale-105"
                   >
                     View All Collections ({galleries.length})
                     <ArrowRight className="ml-2 w-5 h-5" />

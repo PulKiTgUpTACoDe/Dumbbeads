@@ -79,6 +79,18 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  /* ── Theme color tokens (light mode) ── */
+  --theme-bg-primary: #fafbff;
+  --theme-bg-secondary: #f0f2f8;
+  --theme-bg-tertiary: #e4e7f0;
+  --theme-text-primary: #0f1b3d;
+  --theme-text-secondary: #3a4a6b;
+  --theme-text-muted: #7a88a5;
+  --theme-border: #d0d5e3;
+  --theme-card-bg: #d9e4f5;
+  --theme-card-border: #aab5d1;
+  --theme-overlay: rgba(255, 255, 255, 0.7);
 }
 
 .dark {
@@ -113,6 +125,18 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+
+  /* ── Theme color tokens (dark mode) ── */
+  --theme-bg-primary: #0a0a0a;
+  --theme-bg-secondary: #171717;
+  --theme-bg-tertiary: #262626;
+  --theme-text-primary: #ffffff;
+  --theme-text-secondary: #d4d4d4;
+  --theme-text-muted: #a3a3a3;
+  --theme-border: #404040;
+  --theme-card-bg: rgba(32, 30, 30, 0.5);
+  --theme-card-border: #262626;
+  --theme-overlay: rgba(0, 0, 0, 0.6);
 }
 
 @layer base {
@@ -138,6 +162,17 @@
   .will-change-transform {
     will-change: transform;
   }
+
+  /* ── Theme utility classes ── */
+  .bg-theme-primary { background-color: var(--theme-bg-primary); }
+  .bg-theme-secondary { background-color: var(--theme-bg-secondary); }
+  .bg-theme-tertiary { background-color: var(--theme-bg-tertiary); }
+  .text-theme-primary { color: var(--theme-text-primary); }
+  .text-theme-secondary { color: var(--theme-text-secondary); }
+  .text-theme-muted { color: var(--theme-text-muted); }
+  .border-theme { border-color: var(--theme-border); }
+  .bg-theme-card { background-color: var(--theme-card-bg); }
+  .border-theme-card { border-color: var(--theme-card-border); }
 }
 
 /* Lenis smooth scroll */
@@ -184,7 +219,8 @@ html.lenis body {
   100% { background-position: 0% 50%; }
 }
 
-.hero-gradient-bg {
+/* Dark mode hero gradient (default) */
+.dark .hero-gradient-bg {
   background: linear-gradient(
     -45deg,
     #0a0a0a,
@@ -198,18 +234,86 @@ html.lenis body {
   animation: hero-gradient-shift 20s ease-in-out infinite;
 }
 
+/* Light mode hero gradient */
+.hero-gradient-bg {
+  background: linear-gradient(
+    -45deg,
+    #fafbff,
+    #e8eaf6,
+    #dce4f0,
+    #fafbff,
+    #e3e0f7,
+    #fafbff
+  );
+  background-size: 400% 400%;
+  animation: hero-gradient-shift 10s ease-in-out infinite;
+}
+
 /* Hero gradient text shimmer */
 @keyframes hero-text-shimmer {
   0% { background-position: -200% center; }
   100% { background-position: 200% center; }
 }
 
+/* Dark mode text shimmer */
+.dark .hero-gradient-text {
+  background: linear-gradient(90deg, #c084fc, #f472b6, #60a5fa, #c084fc, #f472b6) !important;
+  background-size: 200% auto !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  animation: hero-text-shimmer 4s linear infinite;
+}
+
+/* Light mode text shimmer — deep indigo/blue */
 .hero-gradient-text {
-  background: linear-gradient(90deg, #c084fc, #f472b6, #60a5fa, #c084fc, #f472b6);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
+  background: linear-gradient(90deg, #4338ca, #7c3aed, #2563eb, #4338ca, #7c3aed) !important;
+  background-size: 200% auto !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
   animation: hero-text-shimmer 10s linear infinite;
+}
+
+/* Dark mode subheading gradient */
+.dark .hero-subheading-gradient {
+  background: linear-gradient(90deg, #c4b5fd, #f9a8d4, #93c5fd, #c4b5fd) !important;
+  background-size: 200% auto !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+}
+
+/* Light mode subheading gradient */
+.hero-subheading-gradient {
+  background: linear-gradient(90deg, #4338ca, #277edb, #eb25e8, #4338ca) !important;
+  background-size: 200% auto !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+}
+
+/* Light mode CTA glow — blue tint */
+:root .animate-pulse-glow {
+  animation: pulse-glow-light 2s ease-in-out infinite;
+}
+@keyframes pulse-glow-light {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.3), 0 0 40px rgba(99, 102, 241, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(99, 102, 241, 0.5), 0 0 60px rgba(99, 102, 241, 0.25);
+  }
+}
+.dark .animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Smooth theme transition on body */
+body {
+  transition: background-color 0.4s ease, color 0.4s ease;
 }

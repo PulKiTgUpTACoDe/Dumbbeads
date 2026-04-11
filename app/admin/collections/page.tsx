@@ -1,5 +1,6 @@
 import { getAllCollections } from "@/lib/queries/collections";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Plus, Edit, Eye } from "lucide-react";
 import { redirect } from "next/navigation";
@@ -64,10 +65,12 @@ export default async function CollectionsPage() {
                 {/* Collection Preview */}
                 <div className="aspect-video bg-neutral-800 relative">
                   {collection.products[0]?.images[0] ? (
-                    <img
+                    <Image
                       src={collection.products[0].images[0].url}
                       alt={collection.name}
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                   ) : (
                     <div className="flex items-center justify-center h-full text-neutral-600">

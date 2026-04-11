@@ -3,8 +3,6 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { generateWhatsAppLink } from "@/lib/utils";
 import { Sparkles } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -57,11 +55,6 @@ export default function Hero() {
   const logoMoveX = useTransform(smoothX, [0, 1], [-15, 15]);
   const logoMoveY = useTransform(smoothY, [0, 1], [-15, 15]);
 
-  const handleOrderClick = () => {
-    const link = generateWhatsAppLink("General Inquiry", "N/A", 0);
-    window.open(link, "_blank");
-  };
-
   const handleMouseMove = useCallback(
     (e: React.MouseEvent) => {
       mouseX.set(e.clientX / window.innerWidth);
@@ -72,6 +65,7 @@ export default function Hero() {
 
   // ── Init particles ──
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setParticles(generateParticles(35));
   }, []);
 
@@ -179,7 +173,7 @@ export default function Hero() {
     <section
       ref={sectionRef}
       onMouseMove={handleMouseMove}
-      className="relative h-screen flex items-center justify-center overflow-hidden bg-neutral-950"
+      className="relative h-screen flex items-center justify-center overflow-hidden transition-colors duration-400"
     >
       {/* LAYER 1 — Animated gradient background */}
       <div className="absolute inset-0 hero-gradient-bg" />
@@ -187,7 +181,7 @@ export default function Hero() {
       {/* LAYER 2 — Aurora nebula blobs */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
-          className="absolute -top-1/2 -left-1/4 w-[800px] h-[800px] rounded-full opacity-20"
+          className="absolute -top-1/2 -left-1/4 w-[800px] h-[800px] rounded-full dark:opacity-20 opacity-100"
           style={{
             background: "radial-gradient(circle, rgba(147,51,234,0.4) 0%, transparent 70%)",
             x: bgMoveX,
@@ -197,13 +191,13 @@ export default function Hero() {
           transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute -bottom-1/3 -right-1/4 w-[700px] h-[700px] rounded-full opacity-15"
+          className="absolute -bottom-1/3 -right-1/4 w-[700px] h-[700px] rounded-full dark:opacity-15 opacity-100"
           style={{ background: "radial-gradient(circle, rgba(59,130,246,0.4) 0%, transparent 70%)" }}
           animate={{ scale: [1.1, 0.9, 1.1], rotate: [0, -30, 0], x: [0, 50, 0] }}
           transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute top-1/4 right-1/3 w-[500px] h-[500px] rounded-full opacity-10"
+          className="absolute top-1/4 right-1/3 w-[500px] h-[500px] rounded-full dark:opacity-10 opacity-8"
           style={{ background: "radial-gradient(circle, rgba(236,72,153,0.5) 0%, transparent 70%)" }}
           animate={{ scale: [0.8, 1.15, 0.8], y: [0, -60, 0], x: [0, 30, 0] }}
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
@@ -216,10 +210,10 @@ export default function Hero() {
         className="absolute inset-0 w-full h-full"
         style={{ x: bgMoveX, y: bgMoveY, willChange: "transform" }}
       >
-        <div className="parallax-orb absolute top-[10%] left-[20%] w-72 h-72 bg-purple-500/25 rounded-full blur-3xl will-change-transform" />
-        <div className="parallax-orb absolute bottom-[15%] right-[15%] w-80 h-80 bg-blue-500/20 rounded-full blur-3xl will-change-transform" />
-        <div className="parallax-orb absolute top-[40%] left-[55%] w-96 h-96 bg-pink-500/15 rounded-full blur-3xl will-change-transform" />
-        <div className="parallax-orb absolute top-[60%] left-[10%] w-64 h-64 bg-indigo-500/15 rounded-full blur-3xl will-change-transform" />
+        <div className="parallax-orb absolute top-[10%] left-[20%] w-72 h-72 dark:bg-purple-500/25 bg-indigo-900/15 rounded-full blur-3xl will-change-transform" />
+        <div className="parallax-orb absolute bottom-[15%] right-[15%] w-80 h-80 dark:bg-blue-500/20 bg-blue-900/10 rounded-full blur-3xl will-change-transform" />
+        <div className="parallax-orb absolute top-[40%] left-[55%] w-96 h-96 dark:bg-pink-500/15 bg-violet-900/10 rounded-full blur-3xl will-change-transform" />
+        <div className="parallax-orb absolute top-[60%] left-[10%] w-64 h-64 dark:bg-indigo-500/15 bg-blue-900/10 rounded-full blur-3xl will-change-transform" />
       </motion.div>
 
       {/* LAYER 4 — Multi-type particle system */}
@@ -235,15 +229,16 @@ export default function Hero() {
               height: p.type === "ring" ? p.size * 3 : p.size,
               background:
                 p.type === "ring" ? "none"
-                  : p.type === "star" ? "rgba(255,255,255,0.6)"
-                  : "rgba(255,255,255,0.3)",
-              border: p.type === "ring" ? "1px solid rgba(255,255,255,0.15)" : "none",
-              boxShadow: p.type === "star" ? "0 0 6px rgba(255,255,255,0.4)" : "none",
+                  : p.type === "star" ? "var(--theme-text-muted)"
+                  : "var(--theme-text-muted)",
+              border: p.type === "ring" ? "1px solid var(--theme-border)" : "none",
+              boxShadow: p.type === "star" ? "0 0 6px var(--theme-text-muted)" : "none",
+              opacity: 0.4,
             }}
             animate={{
               y: [0, -(80 + p.drift), 0],
               x: [0, p.drift, 0],
-              opacity: [0, 0.8, 0],
+              opacity: [0, 0.6, 0],
               scale: p.type === "star" ? [0.5, 1.2, 0.5] : [1, 1, 1],
             }}
             transition={{
@@ -258,10 +253,10 @@ export default function Hero() {
 
       {/* LAYER 5 — Subtle mesh grid */}
       <div
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        className="absolute inset-0 dark:opacity-[0.03] opacity-[0.04] pointer-events-none"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
+            "linear-gradient(var(--theme-text-muted) 1px, transparent 1px), linear-gradient(90deg, var(--theme-text-muted) 1px, transparent 1px)",
           backgroundSize: "60px 60px",
         }}
       />
@@ -295,11 +290,11 @@ export default function Hero() {
               />
               {/* Pulsing glow */}
               <motion.div
-                className="absolute -inset-6 rounded-full bg-purple-500/20 blur-xl"
+                className="absolute -inset-6 rounded-full dark:bg-purple-500/20 bg-indigo-400/15 blur-xl"
                 animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.6, 0.3] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
               />
-              <div className="relative w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 rounded-full overflow-hidden border-2 border-white/10 shadow-2xl shadow-purple-500/40 bg-white/5 backdrop-blur-sm">
+              <div className="relative w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 rounded-full overflow-hidden border-2 dark:border-white/10 border-indigo-200/50 shadow-2xl dark:shadow-purple-500/40 shadow-indigo-400/30 dark:bg-white/5 bg-white/50 backdrop-blur-sm">
                 <Image
                   src="/images/logo.jpg"
                   alt="Dumbbeads Logo"
@@ -320,21 +315,21 @@ export default function Hero() {
             <motion.div
               animate={{ y: [0, -4, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/5 backdrop-blur-md border border-white/10"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full dark:bg-white/5 bg-white/60 backdrop-blur-md border dark:border-white/10 border-indigo-200/50"
             >
               <motion.div
                 animate={{ rotate: [0, 15, -15, 0], scale: [1, 1.2, 1] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               >
-                <Sparkles className="w-4 h-4 text-yellow-400" />
+                <Sparkles className="w-4 h-4 text-yellow-400 dark:text-yellow-400" />
               </motion.div>
-              <span className="text-sm font-medium text-white/90">
+              <span className="text-sm font-medium text-theme-primary">
                 Handcrafted with Love
               </span>
             </motion.div>
           </motion.div>
 
-          {/* ── Shimmer gradient headline (inline styles to avoid CSS conflicts) ── */}
+          {/* ── Shimmer gradient headline ── */}
           <h1
             ref={headingRef}
             className="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight overflow-hidden"
@@ -356,13 +351,7 @@ export default function Hero() {
             className="text-xl md:text-2xl max-w-2xl mx-auto"
           >
             <motion.span
-              className="inline-block"
-              style={{
-                background: "linear-gradient(90deg, #c4b5fd, #f9a8d4, #93c5fd, #c4b5fd)",
-                backgroundSize: "200% auto",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
+              className="inline-block hero-subheading-gradient"
               animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
             >
@@ -377,7 +366,7 @@ export default function Hero() {
             transition={{ delay: 0.7, duration: 0.8 }}
           >
             <motion.span
-              className="text-base md:text-lg text-neutral-400"
+              className="text-base md:text-lg text-theme-muted"
               animate={{ opacity: [0.5, 1, 0.5] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             >
@@ -419,9 +408,9 @@ export default function Hero() {
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
               className="inline-block"
             >
-              <div className="w-6 h-10 border-2 border-white/20 rounded-full p-1 backdrop-blur-sm">
+              <div className="w-6 h-10 border-2 dark:border-white/20 border-indigo-300/40 rounded-full p-1 backdrop-blur-sm">
                 <motion.div
-                  className="w-1.5 h-3 rounded-full mx-auto bg-gradient-to-b from-white/60 to-white/20"
+                  className="w-1.5 h-3 rounded-full mx-auto dark:bg-gradient-to-b dark:from-white/60 dark:to-white/20 bg-gradient-to-b from-indigo-500/60 to-indigo-300/20"
                   animate={{ y: [0, 8, 0], opacity: [1, 0.3, 1] }}
                   transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                 />
@@ -432,7 +421,7 @@ export default function Hero() {
       </motion.div>
 
       {/* LAYER 7 — Vignette */}
-      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(0,0,0,0.6)_100%)]" />
+      <div className="absolute inset-0 pointer-events-none dark:bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(0,0,0,0.6)_100%)] bg-[radial-gradient(ellipse_at_center,transparent_50%,rgba(200,210,230,0.3)_100%)]" />
     </section>
   );
 }

@@ -86,10 +86,10 @@ export default function GalleryCard({ gallery, index }: GalleryCardProps) {
         whileTap={{ scale: 0.98 }}
         className="w-full touch-manipulation" // Better touch handling
       >
-        <Card className="group overflow-hidden border-neutral-800 bg-neutral-900/50 backdrop-blur-sm hover:border-purple-500/50 active:border-purple-500 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/20 active:shadow-purple-500/40">
+        <Card className="group overflow-hidden border-theme-card bg-theme-card backdrop-blur-sm dark:hover:border-purple-500/50 hover:border-indigo-400/50 active:border-purple-500 transition-all duration-300 hover:shadow-2xl dark:hover:shadow-purple-500/20 hover:shadow-indigo-300/20 active:shadow-purple-500/40">
           <CardContent className="p-0">
             {/* Cover Image - Mobile optimized aspect ratio */}
-            <div className="relative aspect-square sm:aspect-4/3 overflow-hidden bg-neutral-800">
+            <div className="relative aspect-square sm:aspect-4/3 overflow-hidden bg-theme-tertiary">
               <motion.div
                 whileHover={{ scale: 1.08 }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
@@ -132,18 +132,18 @@ export default function GalleryCard({ gallery, index }: GalleryCardProps) {
             {/* Gallery Details - More compact */}
             <div className="p-4 space-y-3">
               <div>
-                <h3 className="text-lg font-semibold text-white mb-1">
+                <h3 className="text-lg font-semibold text-theme-primary mb-1">
                   {gallery.name}
                 </h3>
-                <p className="text-xs text-neutral-400 leading-relaxed line-clamp-2">
+                <p className="text-xs text-theme-muted leading-relaxed line-clamp-2">
                   {gallery.description}
                 </p>
               </div>
 
               {/* Price and CTA */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-0 pt-3 border-t border-neutral-800">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-0 pt-3 border-t border-theme-card">
                 <div className="text-center sm:text-left">
-                  <p className="text-2xl sm:text-xl font-bold text-white">
+                  <p className="text-2xl sm:text-xl font-bold text-theme-primary">
                     ₹{gallery.price}
                   </p>
                 </div>
@@ -154,7 +154,7 @@ export default function GalleryCard({ gallery, index }: GalleryCardProps) {
                 >
                   <Button
                     onClick={handleBuyNow}
-                    className="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 active:from-purple-800 active:to-pink-800 text-white font-semibold rounded-full px-6 py-6 sm:py-3 text-base sm:text-sm transition-all duration-300 shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50 active:shadow-purple-500/70 touch-manipulation"
+                    className="w-full sm:w-auto bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 active:from-blue-800 active:to-indigo-800 dark:from-purple-600 dark:to-pink-600 dark:hover:from-purple-700 dark:hover:to-pink-700 dark:active:from-purple-800 dark:active:to-pink-800 text-white font-semibold rounded-full px-6 py-6 sm:py-3 text-base sm:text-sm transition-all duration-300 shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 active:shadow-blue-500/70 dark:shadow-purple-500/30 dark:hover:shadow-purple-500/50 dark:active:shadow-purple-500/70 touch-manipulation"
                   >
                     Buy Now
                   </Button>

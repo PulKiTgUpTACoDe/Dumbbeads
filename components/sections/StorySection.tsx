@@ -122,7 +122,7 @@ export default function StorySection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-20 md:py-32 px-4 bg-neutral-950">
+    <section ref={sectionRef} className="py-20 md:py-32 px-4 bg-theme-primary transition-colors duration-400">
       <div className="container mx-auto max-w-7xl space-y-24 md:space-y-40">
         {storyBlocks.map((block, index) => (
           <div
@@ -139,20 +139,20 @@ export default function StorySection() {
               className="story-text space-y-4 md:space-y-6"
               style={{ direction: "ltr", willChange: "transform, opacity" }}
             >
-              <p className="story-subtitle text-sm md:text-base font-medium text-purple-400 uppercase tracking-widest">
+              <p className="story-subtitle text-sm md:text-base font-medium dark:text-purple-400 text-indigo-600 uppercase tracking-widest">
                 {block.subtitle}
               </p>
-              <h2 className="story-title text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
+              <h2 className="story-title text-3xl md:text-4xl lg:text-5xl font-bold text-theme-primary leading-tight">
                 {block.title}
               </h2>
-              <p className="story-desc text-base md:text-lg text-neutral-400 leading-relaxed max-w-lg">
+              <p className="story-desc text-base md:text-lg text-theme-muted leading-relaxed max-w-lg">
                 {block.description}
               </p>
             </div>
 
             {/* Image Block */}
             <div
-              className="story-image relative aspect-[4/3] rounded-2xl overflow-hidden bg-neutral-800"
+              className="story-image relative aspect-[4/3] rounded-2xl overflow-hidden bg-theme-tertiary"
               style={{ direction: "ltr", willChange: "transform, opacity" }}
             >
               <Image
@@ -163,7 +163,7 @@ export default function StorySection() {
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
               {/* linear overlay */}
-              <div className="absolute inset-0 bg-linear-to-t from-neutral-950/40 to-transparent" />
+              <div className="absolute inset-0 dark:bg-linear-to-t dark:from-neutral-950/40 dark:to-transparent bg-linear-to-t from-white/20 to-transparent" />
             </div>
           </div>
         ))}

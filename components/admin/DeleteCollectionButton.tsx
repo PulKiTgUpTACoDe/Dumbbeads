@@ -43,8 +43,8 @@ export default function DeleteCollectionButton({
 
       // Small delay to ensure refresh completes before resetting state
       await new Promise((resolve) => setTimeout(resolve, 500));
-    } catch (error: any) {
-      alert(error.message);
+    } catch (error: unknown) {
+      alert(error instanceof Error ? error.message : String(error));
       setIsDeleting(false);
     }
   };

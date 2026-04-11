@@ -61,7 +61,7 @@ export default function TrustPolicy() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-20 px-4 bg-neutral-950">
+    <section ref={sectionRef} className="py-20 px-4 bg-theme-primary transition-colors duration-400">
       <div className="container mx-auto max-w-6xl">
         {/* Section Header */}
         <motion.div
@@ -71,10 +71,10 @@ export default function TrustPolicy() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-theme-primary mb-4">
             Why Choose Us
           </h2>
-          <p className="text-lg text-neutral-400">
+          <p className="text-lg text-theme-muted">
             Quality, trust, and customer satisfaction guaranteed
           </p>
         </motion.div>
@@ -98,10 +98,10 @@ export default function TrustPolicy() {
 
               {/* Content */}
               <div className="space-y-2">
-                <h3 className="text-xl font-semibold text-white">
+                <h3 className="text-xl font-semibold text-theme-primary">
                   {pillar.title}
                 </h3>
-                <p className="text-neutral-400 leading-relaxed max-w-sm mx-auto">
+                <p className="text-theme-muted leading-relaxed max-w-sm mx-auto">
                   {pillar.description}
                 </p>
               </div>

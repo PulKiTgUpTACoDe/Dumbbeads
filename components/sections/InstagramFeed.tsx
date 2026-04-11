@@ -78,7 +78,7 @@ export default function InstagramFeed() {
   return (
     <section
       ref={sectionRef}
-      className="py-12 sm:py-16 md:py-20 px-4 bg-gradient-to-b from-neutral-900 to-neutral-950"
+      className="py-12 sm:py-16 md:py-20 px-4 bg-theme-secondary transition-colors duration-400"
     >
       <div className="container mx-auto max-w-7xl">
         {/* Section Header */}
@@ -89,10 +89,10 @@ export default function InstagramFeed() {
           transition={{ duration: 0.6 }}
           className="text-center mb-8 sm:mb-10 md:mb-12"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 sm:mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-theme-primary mb-3 sm:mb-4">
             Follow Us on Instagram
           </h2>
-          <p className="text-base sm:text-lg text-neutral-400 mb-5 sm:mb-6 px-4">
+          <p className="text-base sm:text-lg text-theme-muted mb-5 sm:mb-6 px-4">
             Get styling tips, new designs, and exclusive offers
           </p>
 
@@ -119,7 +119,7 @@ export default function InstagramFeed() {
               href={post.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="relative aspect-square group cursor-pointer overflow-hidden rounded-lg bg-neutral-800 block touch-manipulation"
+              className="relative aspect-square group cursor-pointer overflow-hidden rounded-lg bg-theme-tertiary block touch-manipulation"
               style={{ willChange: "transform, opacity" }}
             >
               <Image
@@ -157,9 +157,9 @@ export default function InstagramFeed() {
           transition={{ delay: 0.5 }}
           className="text-center mt-8"
         >
-          <p className="text-neutral-400">
+          <p className="text-theme-muted">
             Tag us in your photos with{" "}
-            <span className="text-purple-400 font-semibold">
+            <span className="dark:text-purple-400 text-indigo-600 font-semibold">
               #DumbbeadsStyle
             </span>
           </p>
