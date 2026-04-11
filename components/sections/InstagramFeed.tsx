@@ -1,9 +1,14 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Instagram } from "lucide-react";
 import Image from "next/image";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const instagramPosts = [
   {
@@ -39,10 +44,44 @@ const instagramPosts = [
 ];
 
 export default function InstagramFeed() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  // GSAP stagger entry for grid items
+  useEffect(() => {
+    if (!gridRef.current) return;
+
+    const ctx = gsap.context(() => {
+      const items = gridRef.current!.children;
+
+      gsap.fromTo(
+        items,
+        { opacity: 0, scale: 0.85 },
+        {
+          opacity: 1,
+          scale: 1,
+          stagger: 0.06,
+          duration: 0.5,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: gridRef.current,
+            start: "top 85%",
+            once: true,
+          },
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="py-12 sm:py-16 md:py-20 px-4 bg-gradient-to-b from-neutral-900 to-neutral-950">
+    <section
+      ref={sectionRef}
+      className="py-12 sm:py-16 md:py-20 px-4 bg-gradient-to-b from-neutral-900 to-neutral-950"
+    >
       <div className="container mx-auto max-w-7xl">
-        {/* Section Header - Mobile optimized */}
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -72,22 +111,17 @@ export default function InstagramFeed() {
           </motion.div>
         </motion.div>
 
-        {/* Instagram Grid - Mobile optimized */}
-        <div className="grid grid-cols-3 gap-2 sm:gap-3 md:gap-4">
-          {instagramPosts.map((post, index) => (
-            <motion.a
+        {/* Instagram Grid — GSAP stagger entry */}
+        <div ref={gridRef} className="grid grid-cols-3 gap-2 sm:gap-3 md:gap-4">
+          {instagramPosts.map((post) => (
+            <a
               key={post.id}
               href={post.url}
               target="_blank"
               rel="noopener noreferrer"
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.05 }}
-              whileTap={{ scale: 0.95 }}
               className="relative aspect-square group cursor-pointer overflow-hidden rounded-lg bg-neutral-800 block touch-manipulation"
+              style={{ willChange: "transform, opacity" }}
             >
-              {/* Image - will show if exists, otherwise gradient */}
               <Image
                 src={post.image}
                 alt={`Instagram post ${post.id}`}
@@ -95,7 +129,6 @@ export default function InstagramFeed() {
                 className="object-cover transition-transform duration-300 group-hover:scale-110"
                 sizes="(max-width: 768px) 33vw, (max-width: 1200px) 25vw, 20vw"
                 onError={(e) => {
-                  // Hide image on error and show gradient
                   e.currentTarget.style.display = "none";
                 }}
               />
@@ -104,19 +137,15 @@ export default function InstagramFeed() {
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 via-pink-500/20 to-blue-500/20" />
 
               {/* Hover Overlay */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileHover={{ opacity: 1 }}
-                className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-center justify-center z-10"
-              >
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-center justify-center z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <div className="text-center">
                   <Instagram className="w-8 h-8 text-white mx-auto mb-2" />
                   <p className="text-white text-xs font-medium">
                     View on Instagram
                   </p>
                 </div>
-              </motion.div>
-            </motion.a>
+              </div>
+            </a>
           ))}
         </div>
 

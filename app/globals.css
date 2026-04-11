@@ -134,4 +134,82 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+
+  .will-change-transform {
+    will-change: transform;
+  }
+}
+
+/* Lenis smooth scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* CTA glow animation */
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.4),
+      0 0 40px rgba(168, 85, 247, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(168, 85, 247, 0.6),
+      0 0 60px rgba(168, 85, 247, 0.3);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Hero animated gradient background */
+@keyframes hero-gradient-shift {
+  0% { background-position: 0% 50%; }
+  25% { background-position: 100% 50%; }
+  50% { background-position: 100% 0%; }
+  75% { background-position: 0% 100%; }
+  100% { background-position: 0% 50%; }
+}
+
+.hero-gradient-bg {
+  background: linear-gradient(
+    -45deg,
+    #0a0a0a,
+    #1a0a2e,
+    #0a1628,
+    #0a0a0a,
+    #1e0a2e,
+    #0a0a0a
+  );
+  background-size: 400% 400%;
+  animation: hero-gradient-shift 20s ease-in-out infinite;
+}
+
+/* Hero gradient text shimmer */
+@keyframes hero-text-shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.hero-gradient-text {
+  background: linear-gradient(90deg, #c084fc, #f472b6, #60a5fa, #c084fc, #f472b6);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: hero-text-shimmer 10s linear infinite;
 }

@@ -1,7 +1,12 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Heart, Shield, Truck } from "lucide-react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const trustPillars = [
   {
@@ -25,8 +30,38 @@ const trustPillars = [
 ];
 
 export default function TrustPolicy() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!gridRef.current) return;
+
+    const ctx = gsap.context(() => {
+      const cards = gridRef.current!.children;
+
+      gsap.fromTo(
+        cards,
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.15,
+          duration: 0.7,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: gridRef.current,
+            start: "top 85%",
+            once: true,
+          },
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="py-20 px-4 bg-neutral-950">
+    <section ref={sectionRef} className="py-20 px-4 bg-neutral-950">
       <div className="container mx-auto max-w-6xl">
         {/* Section Header */}
         <motion.div
@@ -44,16 +79,13 @@ export default function TrustPolicy() {
           </p>
         </motion.div>
 
-        {/* Trust Pillars */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* Trust Pillars — GSAP stagger */}
+        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {trustPillars.map((pillar, index) => (
-            <motion.div
+            <div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
               className="text-center space-y-4"
+              style={{ willChange: "transform, opacity" }}
             >
               {/* Icon */}
               <motion.div
@@ -73,7 +105,7 @@ export default function TrustPolicy() {
                   {pillar.description}
                 </p>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

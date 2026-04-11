@@ -12,7 +12,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             },
             async authorize(credentials) {
                 console.log('🔐 [AUTH] Authorization attempt started')
-                console.log('📧 [AUTH] Email:', credentials?.email)
 
                 if (!credentials?.email || !credentials?.password) {
                     console.log('❌ [AUTH] Missing credentials')
@@ -29,21 +28,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 }
 
                 console.log('✅ [AUTH] User found:', user.email)
-                console.log('🔑 [AUTH] Stored hash:', user.password?.substring(0, 10) + '...')
 
                 const isValidPassword = await verifyPassword(
                     credentials.password as string,
                     user.password
                 )
 
-                console.log('🔐 [AUTH] Password validation result:', isValidPassword)
-
                 if (!isValidPassword) {
                     console.log('❌ [AUTH] Invalid password')
                     return null
                 }
-
-                console.log('✅ [AUTH] Login successful for:', user.email)
                 return {
                     id: user.id,
                     email: user.email,

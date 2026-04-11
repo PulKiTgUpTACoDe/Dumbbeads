@@ -141,14 +141,10 @@ async function migrateGalleries() {
                         },
                     })
                 }
-                console.log(`   ✅ Created ${metadata.variants.length} variants`)
             }
-
-            console.log(`   🎉 Successfully migrated: ${name}`)
         }
 
         console.log("\n\n✨ Migration complete!")
-        console.log("🔍 You can now view your collections at /admin/collections")
     } catch (error) {
         console.error("\n❌ Migration failed:", error)
         throw error

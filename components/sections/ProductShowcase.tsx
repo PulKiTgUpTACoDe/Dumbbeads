@@ -1,17 +1,22 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Gallery } from "@/data/galleries";
 import GalleryCard from "@/components/GalleryCard";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ArrowUp } from "lucide-react";
 import Link from "next/link";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface ProductShowcaseProps {
   galleries: Gallery[];
-  maxGalleries?: number; // Optional limit for how many galleries to show
-  showViewAll?: boolean; // Whether to show the "View All" button
-  isCollectionsPage?: boolean; // Whether this is the collections page
+  maxGalleries?: number;
+  showViewAll?: boolean;
+  isCollectionsPage?: boolean;
 }
 
 export default function ProductShowcase({
@@ -20,15 +25,45 @@ export default function ProductShowcase({
   showViewAll = false,
   isCollectionsPage = false,
 }: ProductShowcaseProps) {
-  // Limit galleries if maxGalleries is specified, otherwise show all
+  const sectionRef = useRef<HTMLElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+
   const displayedGalleries = maxGalleries
     ? galleries.slice(0, maxGalleries)
     : galleries;
 
+  // GSAP stagger entry for gallery cards
+  useEffect(() => {
+    if (!gridRef.current) return;
+
+    const ctx = gsap.context(() => {
+      const cards = gridRef.current!.children;
+
+      gsap.fromTo(
+        cards,
+        { opacity: 0, y: 60 },
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.12,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: gridRef.current,
+            start: "top 85%",
+            once: true,
+          },
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, [displayedGalleries]);
+
   return (
-    <section className="py-12 sm:py-16 md:py-20 px-4 bg-neutral-950">
+    <section ref={sectionRef} className="py-12 sm:py-16 md:py-20 px-4 bg-neutral-950">
       <div className="container mx-auto max-w-7xl">
-        {/* Section Header - Mobile optimized */}
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -45,14 +80,17 @@ export default function ProductShowcase({
           </p>
         </motion.div>
 
-        {/* Gallery Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-[1400px] mx-auto">
+        {/* Gallery Grid — GSAP stagger entry */}
+        <div
+          ref={gridRef}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-[1400px] mx-auto"
+        >
           {displayedGalleries.map((gallery, index) => (
             <GalleryCard key={gallery.id} gallery={gallery} index={index} />
           ))}
         </div>
 
-        {/* View All Collections / Back to Top Button */}
+        {/* View All / Back to Top Button */}
         {showViewAll &&
           (isCollectionsPage || galleries.length > (maxGalleries || 0)) && (
             <motion.div
@@ -68,7 +106,7 @@ export default function ProductShowcase({
                     window.scrollTo({ top: 0, behavior: "smooth" })
                   }
                   size="lg"
-                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-full px-8 py-6 text-lg shadow-2xl shadow-purple-500/50 transition-all duration-300 hover:scale-105"
+                  className="bg-linear-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-full px-8 py-6 text-lg shadow-2xl shadow-purple-500/50 transition-all duration-300 hover:scale-105"
                 >
                   Back to Top
                   <ArrowUp className="ml-2 w-5 h-5" />
@@ -77,7 +115,7 @@ export default function ProductShowcase({
                 <Link href="/collections">
                   <Button
                     size="lg"
-                    className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-full px-8 py-6 text-lg shadow-2xl shadow-purple-500/50 transition-all duration-300 hover:scale-105"
+                    className="bg-linear-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-full px-8 py-6 text-lg shadow-2xl shadow-purple-500/50 transition-all duration-300 hover:scale-105"
                   >
                     View All Collections ({galleries.length})
                     <ArrowRight className="ml-2 w-5 h-5" />
