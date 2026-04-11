@@ -54,21 +54,61 @@ export default function CollectionEditor({
     status: collection.status as "draft" | "published",
   });
 
+  // Track product price edits: { productId: newPrice }
+  const [productPrices, setProductPrices] = useState<Record<string, number>>(
+    () => {
+      const prices: Record<string, number> = {};
+      collection.products.forEach((p) => {
+        prices[p.id] = p.price;
+      });
+      return prices;
+    }
+  );
+
+  const handlePriceChange = (productId: string, value: string) => {
+    const numericValue = parseFloat(value);
+    if (!isNaN(numericValue) && numericValue >= 0) {
+      setProductPrices((prev) => ({ ...prev, [productId]: numericValue }));
+    } else if (value === "") {
+      setProductPrices((prev) => ({ ...prev, [productId]: 0 }));
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
     setIsSubmitting(true);
 
     try {
-      const response = await fetch(`/api/admin/collections/${collection.id}`, {
+      // 1. Update collection details
+      const collectionRes = await fetch(`/api/admin/collections/${collection.id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
-      if (!response.ok) {
-        const data = await response.json();
+      if (!collectionRes.ok) {
+        const data = await collectionRes.json();
         throw new Error(data.error || "Failed to update collection");
+      }
+
+      // 2. Update product prices (only changed ones)
+      const priceUpdates = collection.products
+        .filter((p) => productPrices[p.id] !== p.price)
+        .map((p) =>
+          fetch(`/api/admin/products/${p.id}`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ price: productPrices[p.id] }),
+          })
+        );
+
+      if (priceUpdates.length > 0) {
+        const results = await Promise.all(priceUpdates);
+        const failed = results.find((r) => !r.ok);
+        if (failed) {
+          throw new Error("Failed to update one or more product prices");
+        }
       }
 
       router.push("/admin/collections");
@@ -256,9 +296,29 @@ export default function CollectionEditor({
                       <p className="text-neutral-400 text-sm mt-1">
                         {product.description || "No description"}
                       </p>
-                      <p className="text-blue-400 font-semibold mt-2">
-                        ₹{product.price}
-                      </p>
+                      <div className="mt-2">
+                        <label className="block text-xs font-medium text-neutral-400 mb-1">
+                          Price (₹)
+                        </label>
+                        <div className="flex items-center gap-2">
+                          <span className="text-neutral-400 text-sm">₹</span>
+                          <input
+                            type="number"
+                            min="0"
+                            step="1"
+                            value={productPrices[product.id] ?? product.price}
+                            onChange={(e) =>
+                              handlePriceChange(product.id, e.target.value)
+                            }
+                            className="w-32 px-3 py-1.5 bg-neutral-900 border border-neutral-600 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          />
+                          {productPrices[product.id] !== product.price && (
+                            <span className="text-xs text-yellow-400">
+                              (was ₹{product.price})
+                            </span>
+                          )}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
