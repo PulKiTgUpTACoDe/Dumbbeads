@@ -2,7 +2,7 @@
 
 A premium, mobile-first Instagram landing page for a wearable jewelry brand (beads & necklaces) built with Next.js 16, TypeScript, Tailwind CSS, shadcn/ui, and Framer Motion.
 
-![Dumbbeads Landing Page](https://dumbbeads.vercel.app/)
+# https://dumbbeads.vercel.app/
 
 ## ✨ Features
 
