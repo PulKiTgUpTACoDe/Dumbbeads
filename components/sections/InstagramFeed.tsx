@@ -10,39 +10,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const instagramPosts = [
-  {
-    id: 1,
-    image: "/images/instagram/img1.webp",
-    url: "https://www.instagram.com/p/C8wq8Z7vxhc/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-  },
-  {
-    id: 2,
-    image: "/images/instagram/img2.jpg",
-    url: "https://www.instagram.com/p/C9FdsRvt3bf/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-  },
-  {
-    id: 3,
-    image: "/images/instagram/img3.jpg",
-    url: "https://www.instagram.com/p/C9VDTMLIa_V/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-  },
-  {
-    id: 4,
-    image: "/images/instagram/img4.jpg",
-    url: "https://www.instagram.com/p/C9VDTMLIa_V/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-  },
-  {
-    id: 5,
-    image: "/images/instagram/img5.jpg",
-    url: "https://www.instagram.com/p/C-IVAF2ozcc/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-  },
-  {
-    id: 6,
-    image: "/images/instagram/img6.jpg",
-    url: "https://www.instagram.com/p/DCXAHURonD_/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-  },
-];
-
 export default function InstagramFeed() {
   const sectionRef = useRef<HTMLElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
@@ -110,44 +77,6 @@ export default function InstagramFeed() {
             </Button>
           </motion.div>
         </motion.div>
-
-        {/* Instagram Grid — GSAP stagger entry */}
-        <div ref={gridRef} className="grid grid-cols-3 gap-2 sm:gap-3 md:gap-4">
-          {instagramPosts.map((post) => (
-            <a
-              key={post.id}
-              href={post.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative aspect-square group cursor-pointer overflow-hidden rounded-lg bg-theme-tertiary block touch-manipulation"
-              style={{ willChange: "transform, opacity" }}
-            >
-              <Image
-                src={post.image}
-                alt={`Instagram post ${post.id}`}
-                fill
-                className="object-cover transition-transform duration-300 group-hover:scale-110"
-                sizes="(max-width: 768px) 33vw, (max-width: 1200px) 25vw, 20vw"
-                onError={(e) => {
-                  e.currentTarget.style.display = "none";
-                }}
-              />
-
-              {/* Gradient fallback */}
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 via-pink-500/20 to-blue-500/20" />
-
-              {/* Hover Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-center justify-center z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="text-center">
-                  <Instagram className="w-8 h-8 text-white mx-auto mb-2" />
-                  <p className="text-white text-xs font-medium">
-                    View on Instagram
-                  </p>
-                </div>
-              </div>
-            </a>
-          ))}
-        </div>
 
         {/* Bottom CTA */}
         <motion.div
