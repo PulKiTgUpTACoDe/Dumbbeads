@@ -20,21 +20,21 @@ const storyBlocks: StoryBlock[] = [
     subtitle: "The Art of Beadwork",
     description:
       "Every single piece is meticulously assembled by hand, bead by bead. No machines, no shortcuts — just genuine craftsmanship poured into every design.",
-    image: "/images/gallery-1/image1.webp",
+    image: "https://res.cloudinary.com/dpwtvpae7/image/upload/dumbbeads/bptqowbxy3vbiszqmimu",
   },
   {
     title: "Every Bead Tells a Story",
     subtitle: "Unique by Nature",
     description:
       "We source premium beads from around the world. Each piece carries its own character — colors, textures, and patterns that make your jewelry one of a kind.",
-    image: "/images/gallery-3/image11.webp",
+    image: "https://res.cloudinary.com/dpwtvpae7/image/upload/dumbbeads/kirumiznldare96fsbfz",
   },
   {
     title: "Made Just for You",
     subtitle: "Personal & Intentional",
     description:
       "From choosing your design to the final knot, every order is crafted with intention. This isn't fast fashion — it's jewelry that means something.",
-    image: "/images/gallery-5/get.jpeg",
+    image: "https://res.cloudinary.com/dpwtvpae7/image/upload/dumbbeads/o4snf03svu21d3hzzj7q",
   },
 ];
 

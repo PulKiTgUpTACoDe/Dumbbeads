@@ -296,10 +296,10 @@ export default function Hero() {
               />
               <div className="relative w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 rounded-full overflow-hidden border-2 dark:border-white/10 border-indigo-200/50 shadow-2xl dark:shadow-purple-500/40 shadow-indigo-400/30 dark:bg-white/5 bg-white/50 backdrop-blur-sm">
                 <Image
-                  src="/images/logo.jpg"
+                  src="/images/logo-new.jpg"
                   alt="Dumbbeads Logo"
                   fill
-                  className="object-cover"
+                  className="object-cover scale-125"
                   priority
                 />
               </div>

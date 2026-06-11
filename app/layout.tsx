@@ -16,8 +16,8 @@ export const metadata: Metadata = {
   description:
     "Unique, minimal, handmade beaded jewelry. Shop our collection of handcrafted necklaces and bracelets. Order directly on WhatsApp.",
   icons: {
-    icon: [{ url: "/images/logo.jpg" }, { url: "/favicon.ico" }],
-    apple: "/images/logo.jpg",
+    icon: [{ url: "/images/logo-new.jpg" }],
+    apple: "/images/logo-new.jpg",
   },
   keywords: [
     "handmade jewelry",
